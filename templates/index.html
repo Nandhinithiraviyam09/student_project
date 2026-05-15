@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Registration System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Student Registration System</h1>
+
+        <form method="POST">
+
+            <input type="text"
+       name="student_name"
+       placeholder="Enter Student Name">
+
+            <input type="email"
+       name="student_email"
+       placeholder="Enter Email">
+
+            <input type="text"
+       name="student_course"
+       placeholder="Enter Course">
+
+            <button type="submit">
+                Register Student
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
