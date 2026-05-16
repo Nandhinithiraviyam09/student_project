@@ -8,7 +8,7 @@ app = Flask(__name__)
 # MYSQL PUBLIC URL
 mysql_url = os.environ.get("MYSQL_PUBLIC_URL")
 
-# PARSE URL
+# PARSE DATABASE URL
 url = urlparse(mysql_url)
 
 # DATABASE CONNECTION
@@ -20,11 +20,10 @@ db = mysql.connector.connect(
     port=url.port
 )
 
-cursor = db.cursor()
-
-# HOME PAGE
 @app.route('/', methods=['GET', 'POST'])
 def home():
+
+    cursor = db.cursor()
 
     if request.method == 'POST':
 
@@ -44,6 +43,7 @@ def home():
         )
 
         cursor.execute(sql, values)
+
         db.commit()
 
         return redirect('/')
