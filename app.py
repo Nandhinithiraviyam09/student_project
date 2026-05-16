@@ -5,13 +5,13 @@ import os
 
 app = Flask(__name__)
 
-# GET MYSQL PUBLIC URL
+# MYSQL PUBLIC URL
 mysql_url = os.environ.get("MYSQL_PUBLIC_URL")
 
 # PARSE URL
 url = urlparse(mysql_url)
 
-# MYSQL CONNECTION
+# DATABASE CONNECTION
 db = mysql.connector.connect(
     host=url.hostname,
     user=url.username,
@@ -22,6 +22,7 @@ db = mysql.connector.connect(
 
 cursor = db.cursor()
 
+# HOME PAGE
 @app.route('/', methods=['GET', 'POST'])
 def home():
 
@@ -43,7 +44,6 @@ def home():
         )
 
         cursor.execute(sql, values)
-
         db.commit()
 
         return redirect('/')
