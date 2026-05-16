@@ -1,41 +1,61 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Student Registration System</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>Student Registration System</h1>
+    <h1>Student Registration System</h1>
 
-        <form method="POST">
+    <form method="POST">
 
-            <input type="text"
-       name="student_name"
-       placeholder="Enter Student Name">
+        <input
+            type="text"
+            name="student_name"
+            placeholder="Enter Name"
+            required
+        >
 
-            <input type="email"
-       name="student_email"
-       placeholder="Enter Email">
+        <input
+            type="email"
+            name="student_email"
+            placeholder="Enter Email"
+            required
+        >
 
-            <input type="text"
-       name="student_course"
-       placeholder="Enter Course">
+        <input
+            type="text"
+            name="student_course"
+            placeholder="Enter Course"
+            required
+        >
 
-            <button type="submit">
-                Register Student
-            </button>
+        <button type="submit">
+            Add Student
+        </button>
 
-        </form>
+    </form>
+
+    <h2>Student List</h2>
+
+    {% for student in students %}
+
+    <div class="student-card">
+
+        <h3>{{ student[1] }}</h3>
+
+        <p>{{ student[2] }}</p>
+
+        <p>{{ student[3] }}</p>
 
     </div>
 
-</body>
+    {% endfor %}
 
+</div>
+
+</body>
 </html>
