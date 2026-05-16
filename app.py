@@ -1,16 +1,23 @@
 from flask import Flask, render_template, request, redirect
 import mysql.connector
+from urllib.parse import urlparse
 import os
 
 app = Flask(__name__)
 
+# GET MYSQL PUBLIC URL
+mysql_url = os.environ.get("MYSQL_PUBLIC_URL")
+
+# PARSE URL
+url = urlparse(mysql_url)
+
 # MYSQL CONNECTION
 db = mysql.connector.connect(
-    host=os.environ.get("MYSQLHOST"),
-    user=os.environ.get("MYSQLUSER"),
-    password=os.environ.get("MYSQLPASSWORD"),
-    database=os.environ.get("MYSQLDATABASE"),
-    port=int(os.environ.get("MYSQLPORT"))
+    host=url.hostname,
+    user=url.username,
+    password=url.password,
+    database=url.path[1:],
+    port=url.port
 )
 
 cursor = db.cursor()
@@ -41,7 +48,6 @@ def home():
 
         return redirect('/')
 
-    # FETCH STUDENTS
     cursor.execute("SELECT * FROM students")
 
     students = cursor.fetchall()
